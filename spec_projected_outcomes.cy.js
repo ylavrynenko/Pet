@@ -21,7 +21,7 @@ describe('table Projected Outcomes', function () {
     cy.selectProject(Cypress.env('projectName'))
   })
 
-  it('CMTS-6-create-new-projected-outcome', { tags: ['@smoke', '@regression']}, () => {
+  it('create-new-projected-outcome', { tags: ['@smoke', '@regression']}, () => {
     cy.get(OutcomesPageElements.openCreateNewProjectedOutcomeBtn).click()
     cy.fillOutcome(contentsOutcomes.projectedOutcomeLbl, contentsOutcomes.outcomeDescription, contentsOutcomes.outcomePercentage, contentsOutcomes.outcomeValueNeutral, contentsOutcomes.outcomeColor )
     cy.get(OutcomesPageElements.validationMsg).should('not.exist')
@@ -45,7 +45,7 @@ describe('table Projected Outcomes', function () {
     cy.contains('.topLink', 'Outcomes').should('be.visible').click()
   })
 
-  it('CMTS-9-edit-projected-outcome', { tags: ['@smoke', '@regression']},  () => {
+  it('edit-projected-outcome', { tags: ['@smoke', '@regression']},  () => {
     OutcomesPageElements.getEditBtn(OutcomesPageElements.projectedOutcomesTable, 'ProjectedOutcomeToEdit').click()
 
     cy.fillOutcome(contentsOutcomes.projectedOutcomeUpdated, contentsOutcomes.outcomeDescriptionUpdated, contentsOutcomes.outcomePercentageUpdated, contentsOutcomes.outcomeValueUpdated, contentsOutcomes.outcomeColorUpdated )
@@ -55,7 +55,7 @@ describe('table Projected Outcomes', function () {
     cy.checkOutcomeFields(contentsOutcomes.projectedOutcomeUpdated, contentsOutcomes.outcomePercentageUpdated, contentsOutcomes.outcomeValueUpdated, contentsOutcomes.outcomeColorUpdated, contentsOutcomes.outcomeDescriptionUpdated)
   })
 
-  it('CMTS-100-delete-projected-outcome', { tags: ['@smoke', '@regression']}, () => {
+  it('delete-projected-outcome', { tags: ['@smoke', '@regression']}, () => {
     // delete created and updated outcome
     OutcomesPageElements.getDeleteBtn(OutcomesPageElements.projectedOutcomesTable, 'ProjectedOutcomeToDelete').click({ force: true })
 
@@ -66,7 +66,7 @@ describe('table Projected Outcomes', function () {
     cy.contains(OutcomesPageElements.outcomeRow, 'ProjectedOutcomeToDelete').should('not.exist')
   })
 
-  it('CMTS-101-reset-functionality-while-outcomes-adding', { tags: '@regression'}, () => {
+  it('reset-functionality-while-outcomes-adding', { tags: '@regression'}, () => {
     // fill pop-up Create New Projected Outcome
     cy.get(OutcomesPageElements.openCreateNewProjectedOutcomeBtn).should('be.visible').click()
     cy.fillOutcome(contentsOutcomes.projectedOutcomeLbl, contentsOutcomes.outcomeDescription, contentsOutcomes.outcomePercentage, contentsOutcomes.outcomeValueNeutral, contentsOutcomes.outcomeColor )
@@ -81,14 +81,14 @@ describe('table Projected Outcomes', function () {
     cy.get(OutcomesPageElements.openCreateNewProjectedOutcomeBtn).should('be.visible').click()
   })
 
-  it('CMTS-8819-to-validate-it-is-possible-to-create-the-outcome-with-empty-description', { tags: '@regression'}, () =>{
+  it('to-validate-it-is-possible-to-create-the-outcome-with-empty-description', { tags: '@regression'}, () =>{
   cy.get(OutcomesPageElements.openCreateNewProjectedOutcomeBtn).click()
   cy.fillOutcome('ProjectedOutcomeNoDescription', '', contentsOutcomes.outcomePercentage, contentsOutcomes.outcomeValueNeutral, contentsOutcomes.outcomeColor )
   cy.get(OutcomesPageElements.addProjectedOutcomeBtn).click()
   cy.checkOutcomeFields('ProjectedOutcomeNoDescription', contentsOutcomes.outcomePercentage, contentsOutcomes.outcomeValueNeutral, contentsOutcomes.outcomeColor, '' )
   })
 
-  it.skip('CMTS-9584-check-change-outcomes-colors', { tags: '@regression'}, () =>{
+  it.skip('check-change-outcomes-colors', { tags: '@regression'}, () =>{
     OutcomesPageElements.getEditBtn(OutcomesPageElements.projectedOutcomesTable, 'HITL').click()
     cy.selectCustom(OutcomesPageElements.outcomeColorSel, ' #EB4627 ')
     cy.get(OutcomesPageElements.addProjectedOutcomeBtn).filter(':visible').click()
@@ -98,7 +98,7 @@ describe('table Projected Outcomes', function () {
 
   })
 
-  describe('CMTS-8414-test-pack-for-projected-outcomes-validations', { tags: '@regression'}, () => {
+  describe('test-pack-for-projected-outcomes-validations', { tags: '@regression'}, () => {
     it('CMTS-8428-to-validate-it-is-not-possible-for-user-to-create-the-fallback-outcome-cause-it-is-default', () => {
       // open modal Create New Projected Outcome
       cy.get(OutcomesPageElements.openCreateNewProjectedOutcomeBtn).click()
@@ -130,7 +130,7 @@ describe('table Projected Outcomes', function () {
     cy.get(OutcomesPageElements.openCreateNewProjectedOutcomeBtn).click()
     })
 
-    it('CMTS-8424-to-validate-the-name-with-33-characters-is-not-valid-outcome-s-name', () => {
+    it('to-validate-the-name-with-33-characters-is-not-valid-outcome-s-name', () => {
     // open modal Create New Projected Outcome
     cy.get(OutcomesPageElements.openCreateNewProjectedOutcomeBtn).click()
     OutcomesPageElements.checkValidationError(OutcomesPageElements.outcomeNameLabel, contentsOutcomes.lengthLimitErrMsg, OutcomesPageElements.outcomeNameField, contentsOutcomes.name33Letters, true)
@@ -138,7 +138,7 @@ describe('table Projected Outcomes', function () {
     cy.get(OutcomesPageElements.openCreateNewProjectedOutcomeBtn).click()
     })
 
-    it('CMTS-8421-to-validate-the-name-with-32-characters-including-special-characters-inside-is-a-valid', () => {
+    it('to-validate-the-name-with-32-characters-including-special-characters-inside-is-a-valid', () => {
     // open modal Create New Projected Outcome
     cy.get(OutcomesPageElements.openCreateNewProjectedOutcomeBtn).click()
     OutcomesPageElements.checkValidationError(OutcomesPageElements.outcomeNameLabel, contentsOutcomes.lengthLimitErrMsg, OutcomesPageElements.outcomeNameField, 'abcdfghABCDFGHIJKLMNOPQRSTUVWZYZ', false)
@@ -146,7 +146,7 @@ describe('table Projected Outcomes', function () {
     cy.get(OutcomesPageElements.openCreateNewProjectedOutcomeBtn).click()
     })
 
-    it('CMTS-8415-to-validate-the-name-with-2-characters-is-a-valid-outcome-s-name', () => {
+    it('to-validate-the-name-with-2-characters-is-a-valid-outcome-s-name', () => {
       // open modal Create New Projected Outcome
       cy.get(OutcomesPageElements.openCreateNewProjectedOutcomeBtn).click()
       OutcomesPageElements.checkValidationError(OutcomesPageElements.outcomeNameLabel, contentsOutcomes.lengthLimitErrMsg, OutcomesPageElements.outcomeNameField, 'ab', false)
@@ -154,7 +154,7 @@ describe('table Projected Outcomes', function () {
       cy.get(OutcomesPageElements.openCreateNewProjectedOutcomeBtn).click()
     })
 
-    it('CMTS-8427-to-validate-it-is-not-possible-to-create-the-outcome-with-the-default-outcomes-name-which', () => {
+    it('to-validate-it-is-not-possible-to-create-the-outcome-with-the-default-outcomes-name-which', () => {
     // open modal Create New Projected Outcome
     cy.get(OutcomesPageElements.openCreateNewProjectedOutcomeBtn).click()
     OutcomesPageElements.checkValidationError(OutcomesPageElements.outcomeNameLabel, contentsOutcomes.notUniqueErrMsg, OutcomesPageElements.outcomeNameField, 'HITL', true)
@@ -162,7 +162,7 @@ describe('table Projected Outcomes', function () {
     cy.get(OutcomesPageElements.openCreateNewProjectedOutcomeBtn).click()
     })
 
-    it('CMTS-8423-to-validate-the-name-with-1-character-is-not-valid-outcome-s-name', () => {
+    it('to-validate-the-name-with-1-character-is-not-valid-outcome-s-name', () => {
     // open modal Create New Projected Outcome
     cy.get(OutcomesPageElements.openCreateNewProjectedOutcomeBtn).click()
     OutcomesPageElements.checkValidationError(OutcomesPageElements.outcomeNameLabel, contentsOutcomes.lengthLimitErrMsg, OutcomesPageElements.outcomeNameField, contentsOutcomes.oneLetter, true)
@@ -170,7 +170,7 @@ describe('table Projected Outcomes', function () {
     cy.get(OutcomesPageElements.openCreateNewProjectedOutcomeBtn).click()
     })
 
-    it('CMTS-8421-to-validate-the-name-with-32-characters-including-special-characters-inside-is-a-valid', () => {
+    it('to-validate-the-name-with-32-characters-including-special-characters-inside-is-a-valid', () => {
     // open modal Create New Projected Outcome
     cy.get(OutcomesPageElements.openCreateNewProjectedOutcomeBtn).click()
     OutcomesPageElements.checkValidationError(OutcomesPageElements.outcomeNameLabel, contentsOutcomes.lengthLimitErrMsg, OutcomesPageElements.outcomeNameField, contentsOutcomes.projectedOutcomeNameSpecSymbols, false)
